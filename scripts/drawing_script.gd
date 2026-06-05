@@ -10,7 +10,7 @@ signal on_requested_texture(current_texture : Texture2D)
 @export var pixel_position : Vector2i
 @export var is_drawing : bool
 @export var recieved_position_in_percent : Vector3
-@export_range(1,6)var brush_radius : int = 1:
+@export_range(1,10)var brush_radius : int = 1:
 	set(value):
 		brush_radius = value
 		brush = circle_brush(brush_radius)

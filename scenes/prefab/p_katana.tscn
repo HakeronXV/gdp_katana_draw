@@ -57,15 +57,15 @@ shadow_mesh = SubResource("ArrayMesh_m02oi")
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="Katana" type="Node3D" unique_id=1823821026 node_paths=PackedStringArray("raycast_line", "debug_point")]
+[node name="Katana Raycast" type="Node3D" unique_id=1823821026 node_paths=PackedStringArray("raycast_line", "debug_point")]
 transform = Transform3D(1, 0, 0, 0, -0.018726967, -0.99982464, 0, 0.99982464, -0.018726967, 0, 0, 0)
 script = ExtResource("1_v03f2")
 raycast_line = [NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D10"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D9"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D8"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D7"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D6"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D5"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D4"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D3"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D2"), NodePath("Katana_LP-correctif/MSH_Katana_LP_BCP/RayCast3D")]
-debug_point = NodePath("MeshInstance3D2")
+debug_point = NodePath("LocalisationPoint")
 
 [node name="Katana_LP-correctif" parent="." unique_id=1999221399 instance=ExtResource("2_k17a3")]
 
-[node name="MSH_Katana_LP_BCP" parent="Katana_LP-correctif" index="0" unique_id=660766358]
+[node name="MSH_Katana_LP_BCP" parent="Katana_LP-correctif" index="0" unique_id=834923910]
 transform = Transform3D(1.9106859e-15, 4.3711392e-08, 1, 1.0000002, -4.284084e-08, 1.110223e-16, 4.284084e-08, 1.0000001, -4.371139e-08, 0, 0.56240237, -0.22149377)
 mesh = SubResource("ArrayMesh_tkscl")
 
@@ -129,11 +129,12 @@ target_position = Vector3(0, 0.01134, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 1
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=526475319]
+[node name="LocalisationPoint" type="MeshInstance3D" parent="." unique_id=526475319]
 transform = Transform3D(0.03, 0, 0, 0, 0.03, 9.313226e-10, 0, -9.313226e-10, 0.03, 0, -0.25621888, -0.23968942)
+visible = false
 mesh = SubResource("SphereMesh_3m8lq")
 surface_material_override/0 = SubResource("StandardMaterial3D_ktqcq")
 
-[connection signal="katana_is_touching" from="." to="MeshInstance3D2" method="set_visible"]
+[connection signal="katana_is_touching" from="." to="LocalisationPoint" method="set_visible"]
 
 [editable path="Katana_LP-correctif"]

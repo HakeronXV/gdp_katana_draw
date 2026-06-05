@@ -9,48 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c5nsnmbbci604" path="res://addons/katana_draw/assets/Kanji/Facile/Talent.svg" id="7_jq8r1"]
 [ext_resource type="Script" uid="uid://cn6t5x1pl1day" path="res://addons/katana_draw/scripts/failed_and_victory.gd" id="8_1pmgm"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_eqtvh"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_1epjq"]
-
-[sub_resource type="Animation" id="Animation_1epjq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vkkdf"]
-resource_name = "left_right"
-length = 3.0333333
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.54, 3.01),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.6479535, 0), Vector3(0, -0.6569943, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqtvh"]
-_data = {
-&"RESET": SubResource("Animation_1epjq"),
-&"left_right": SubResource("Animation_vkkdf")
-}
-
 [sub_resource type="QuadMesh" id="QuadMesh_wyo0h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3wq8"]
@@ -91,61 +49,20 @@ render_target_update_mode = 4
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1459200077]
 centered = false
 
-[node name="Script" type="Node" parent="." unique_id=835427384 node_paths=PackedStringArray("down_left", "top_right")]
-script = ExtResource("1_1epjq")
-down_left = NodePath("../Quad/down_left")
-top_right = NodePath("../Quad/up_right")
-
-[node name="PixelCounter" type="Node" parent="Script" unique_id=1151370069 node_paths=PackedStringArray("sprite2d")]
-script = ExtResource("2_35lmr")
-liste_kanji = Array[Texture2D]([ExtResource("3_ak6ka"), ExtResource("4_ph73b"), ExtResource("5_h5gec"), ExtResource("1_eqtvh"), ExtResource("7_jq8r1")])
-sprite2d = NodePath("../../SubViewport/Sprite2D")
-metadata/_custom_type_script = "uid://6p73hmdhwtbv"
-
-[node name="FailedAndVictory" type="Node" parent="Script/PixelCounter" unique_id=1635695159]
-script = ExtResource("8_1pmgm")
-metadata/_custom_type_script = "uid://cn6t5x1pl1day"
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1448721934]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.056004524, 0.7584158, -0.16725647)
-mesh = SubResource("BoxMesh_eqtvh")
-
-[node name="Node3D" type="Node3D" parent="MeshInstance3D2" unique_id=1443108155]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, -0.4682714)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2/Node3D" unique_id=1792805247]
-transform = Transform3D(2.44, 0, 0, 0, 1.815, 0, 0, 0, 0.169, 0, 0, 0.06477612)
-mesh = SubResource("SphereMesh_1epjq")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=31015759]
 transform = Transform3D(1, 0, 0, 0, 0.43728846, 0.8993213, 0, -0.8993213, 0.43728846, 0, 1.8998849, 0)
 light_energy = 3.246
 
-[node name="Node3D" type="Node3D" parent="." unique_id=1358675582]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=2017224388]
-libraries/ = SubResource("AnimationLibrary_eqtvh")
-autoplay = &"left_right"
-
-[node name="Pivot" type="Node3D" parent="Node3D" unique_id=1693644126]
-
-[node name="Camera3D" type="Camera3D" parent="Node3D/Pivot" unique_id=1686985493]
-transform = Transform3D(0.90328294, -0.15810925, 0.3988502, 0, 0.92962223, 0.36851397, -0.4290455, -0.33287236, 0.83971184, 1.374355, 0.6493776, 0.98383564)
-
-[node name="Label3D" type="Label3D" parent="." unique_id=1750334735]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09537673, -0.69075966)
-text = "Test"
-
 [node name="Quad" type="Node3D" parent="." unique_id=458882736]
 transform = Transform3D(0.5, 0, 0, 0, 0.29928118, -0.40053812, 0, 0.40053812, 0.29928118, 0.051255047, 0.763603, -0.5387547)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Quad" unique_id=774543242]
+[node name="BackGround" type="MeshInstance3D" parent="Quad" unique_id=774543242]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.003, 0)
 mesh = SubResource("QuadMesh_wyo0h")
-skeleton = NodePath("../Kanji_Support")
+skeleton = NodePath("../KanjiSupport")
 surface_material_override/0 = SubResource("StandardMaterial3D_a3wq8")
 
-[node name="Kanji_Support" type="MeshInstance3D" parent="Quad" unique_id=1440527393]
+[node name="KanjiSupport" type="MeshInstance3D" parent="Quad" unique_id=1440527393]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 mesh = SubResource("QuadMesh_vkkdf")
 skeleton = NodePath("../..")
@@ -154,7 +71,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qq3yi")
 [node name="MeshDrawing" type="MeshInstance3D" parent="Quad" unique_id=48204114]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.001, 0)
 mesh = SubResource("QuadMesh_pxfo0")
-skeleton = NodePath("../Kanji_Support")
+skeleton = NodePath("../KanjiSupport")
 surface_material_override/0 = SubResource("StandardMaterial3D_good6")
 
 [node name="down_left" type="Node3D" parent="Quad" unique_id=528428305]
@@ -163,22 +80,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
 [node name="up_right" type="Node3D" parent="Quad" unique_id=1145692029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Quad" unique_id=782924640]
+[node name="CollisionBoard" type="StaticBody3D" parent="Quad" unique_id=782924640]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/StaticBody3D" unique_id=1246878570]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/CollisionBoard" unique_id=1246878570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040283203, -1.1920929e-07)
 shape = SubResource("BoxShape3D_1pmgm")
 
-[node name="MeshInstance3DF" type="MeshInstance3D" parent="." unique_id=555087801]
+[node name="TestCubeDefeat" type="MeshInstance3D" parent="." unique_id=555087801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9982848, 0, 0)
 mesh = SubResource("BoxMesh_1pmgm")
 
-[node name="MeshInstance3DV" type="MeshInstance3D" parent="." unique_id=1495429666]
+[node name="TestCubeVictory" type="MeshInstance3D" parent="." unique_id=1495429666]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8044662, 0, 0)
 mesh = SubResource("BoxMesh_1pmgm")
 
-[connection signal="on_local_position_debug" from="Script" to="Label3D" method="set_text"]
-[connection signal="total_score_richard_percent01_fail" from="Script/PixelCounter" to="Script/PixelCounter/FailedAndVictory" method="set_failed_percent_value"]
-[connection signal="total_score_richard_percent01_valid" from="Script/PixelCounter" to="Script/PixelCounter/FailedAndVictory" method="set_victory_percent_value"]
-[connection signal="fail_found" from="Script/PixelCounter/FailedAndVictory" to="MeshInstance3DF" method="set_visible" binds= [false]]
-[connection signal="victory_found" from="Script/PixelCounter/FailedAndVictory" to="MeshInstance3DV" method="set_visible" binds= [false]]
+[node name="Code" type="Node" parent="." unique_id=2122314755]
+
+[node name="FailedAndVictory" type="Node" parent="Code" unique_id=1635695159]
+script = ExtResource("8_1pmgm")
+metadata/_custom_type_script = "uid://cn6t5x1pl1day"
+
+[node name="PixelCounter" type="Node" parent="Code" unique_id=1151370069 node_paths=PackedStringArray("sprite2d")]
+script = ExtResource("2_35lmr")
+liste_kanji = Array[Texture2D]([ExtResource("3_ak6ka"), ExtResource("4_ph73b"), ExtResource("5_h5gec"), ExtResource("1_eqtvh"), ExtResource("7_jq8r1")])
+sprite2d = NodePath("../../SubViewport/Sprite2D")
+metadata/_custom_type_script = "uid://6p73hmdhwtbv"
+
+[node name="Timer" type="Timer" parent="Code/PixelCounter" unique_id=472877740]
+autostart = true
+
+[node name="RelocateKatana" type="Node" parent="Code" unique_id=835427384 node_paths=PackedStringArray("down_left", "top_right")]
+script = ExtResource("1_1epjq")
+down_left = NodePath("../../Quad/down_left")
+top_right = NodePath("../../Quad/up_right")
+
+[connection signal="fail_found" from="Code/FailedAndVictory" to="TestCubeDefeat" method="set_visible" binds= [false]]
+[connection signal="victory_found" from="Code/FailedAndVictory" to="TestCubeVictory" method="set_visible" binds= [false]]
+[connection signal="total_score_richard_percent01_fail" from="Code/PixelCounter" to="Code/FailedAndVictory" method="set_failed_percent_value"]
+[connection signal="total_score_richard_percent01_valid" from="Code/PixelCounter" to="Code/FailedAndVictory" method="set_victory_percent_value"]

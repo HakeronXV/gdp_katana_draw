@@ -113,17 +113,17 @@ func compute_result_from_texture_and_emit(texture:Texture2D):
 
 
 	## YOUR CODE HERE I DONT TOUCH THAT DOWN 
-	print("--- Analyse du Calque ---")
-	print("Total pixels : ", result_given.total_pixels)
-	print("Pixels Invisibles (Alpha) : ", result_given.transparent_pixels)
-	print("Pixels Visibles : ", result_given.visible_pixels)
-	print("Pixels Noirs détectés : ", result_given.black_pixels)
+	#print("--- Analyse du Calque ---")
+	#print("Total pixels : ", result_given.total_pixels)
+	#print("Pixels Invisibles (Alpha) : ", result_given.transparent_pixels)
+	#print("Pixels Visibles : ", result_given.visible_pixels)
+	#print("Pixels Noirs détectés : ", result_given.black_pixels)
 	
 	origin_pixel_alpha = result_at_ready["transparent_pixels"]
 	origin_pixel_black = result_at_ready["black_pixels"]
 	
-	print("Original Pixel Invisible : ", origin_pixel_alpha)
-	print("Original Pixel Black :", origin_pixel_black)
+	#print("Original Pixel Invisible : ", origin_pixel_alpha)
+	#print("Original Pixel Black :", origin_pixel_black)
 
 
 	#Calcul pourcentage for pixel colored black and alpha.
