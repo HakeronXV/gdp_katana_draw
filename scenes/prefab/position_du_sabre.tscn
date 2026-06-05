@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://btbbr057a83en"]
+
+[ext_resource type="Script" uid="uid://cp2mcj4870i2a" path="res://addons/katana_draw/scripts/relocated_point_of_katana.gd" id="1_1epjq"]
+[ext_resource type="Texture2D" uid="uid://dbkk4wtodth2h" path="res://addons/katana_draw/assets/Kanji/Facile/Stand_Up.svg" id="1_eqtvh"]
+[ext_resource type="Script" uid="uid://6p73hmdhwtbv" path="res://addons/katana_draw/scripts/pixel_counter.gd" id="2_35lmr"]
+[ext_resource type="Texture2D" uid="uid://cvax5ydcao40e" path="res://addons/katana_draw/assets/Kanji/Facile/Fire.svg" id="3_ak6ka"]
+[ext_resource type="Texture2D" uid="uid://b8wk6j44fghpy" path="res://addons/katana_draw/assets/Kanji/Facile/Period.svg" id="4_ph73b"]
+[ext_resource type="Texture2D" uid="uid://dfuf8wkj3qtt7" path="res://addons/katana_draw/assets/Kanji/Facile/Six.svg" id="5_h5gec"]
+[ext_resource type="Texture2D" uid="uid://c5nsnmbbci604" path="res://addons/katana_draw/assets/Kanji/Facile/Talent.svg" id="7_jq8r1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_eqtvh"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1epjq"]
+
+[sub_resource type="Animation" id="Animation_1epjq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vkkdf"]
+resource_name = "left_right"
+length = 3.0333333
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.54, 3.01),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.6479535, 0), Vector3(0, -0.6569943, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqtvh"]
+_data = {
+&"RESET": SubResource("Animation_1epjq"),
+&"left_right": SubResource("Animation_vkkdf")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_wyo0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3wq8"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_vkkdf"]
+lightmap_size_hint = Vector2i(7, 7)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_eqtvh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qq3yi"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.56078434, 0.7372549, 0.5254902, 1)
+albedo_texture = SubResource("ViewportTexture_eqtvh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_pxfo0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_good6"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ak6ka"]
+size = Vector3(1, 0.058532715, 1)
+
+[node name="PositionDuSabre" type="Node3D" unique_id=704180931]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=240347611]
+transparent_bg = true
+size = Vector2i(220, 220)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1459200077]
+centered = false
+
+[node name="Script" type="Node" parent="." unique_id=835427384 node_paths=PackedStringArray("down_left", "top_right")]
+script = ExtResource("1_1epjq")
+down_left = NodePath("../Quad/down_left")
+top_right = NodePath("../Quad/up_right")
+
+[node name="PixelCounter" type="Node" parent="Script" unique_id=1151370069 node_paths=PackedStringArray("sprite2d")]
+script = ExtResource("2_35lmr")
+liste_kanji = Array[Texture2D]([ExtResource("3_ak6ka"), ExtResource("4_ph73b"), ExtResource("5_h5gec"), ExtResource("1_eqtvh"), ExtResource("7_jq8r1")])
+sprite2d = NodePath("../../SubViewport/Sprite2D")
+metadata/_custom_type_script = "uid://6p73hmdhwtbv"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1448721934]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.056004524, 0.7584158, -0.16725647)
+mesh = SubResource("BoxMesh_eqtvh")
+
+[node name="Node3D" type="Node3D" parent="MeshInstance3D2" unique_id=1443108155]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, -0.4682714)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2/Node3D" unique_id=1792805247]
+transform = Transform3D(2.44, 0, 0, 0, 1.815, 0, 0, 0, 0.169, 0, 0, 0.06477612)
+mesh = SubResource("SphereMesh_1epjq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=31015759]
+transform = Transform3D(1, 0, 0, 0, 0.43728846, 0.8993213, 0, -0.8993213, 0.43728846, 0, 1.8998849, 0)
+light_energy = 3.246
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1358675582]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=2017224388]
+libraries/ = SubResource("AnimationLibrary_eqtvh")
+autoplay = &"left_right"
+
+[node name="Pivot" type="Node3D" parent="Node3D" unique_id=1693644126]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/Pivot" unique_id=1686985493]
+transform = Transform3D(0.90328294, -0.15810925, 0.3988502, 0, 0.92962223, 0.36851397, -0.4290455, -0.33287236, 0.83971184, 1.374355, 0.6493776, 0.98383564)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1750334735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09537673, -0.69075966)
+text = "Test"
+
+[node name="Quad" type="Node3D" parent="." unique_id=458882736]
+transform = Transform3D(0.5, 0, 0, 0, 0.29928118, -0.40053812, 0, 0.40053812, 0.29928118, 0.051255047, 0.763603, -0.5387547)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Quad" unique_id=774543242]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.024504047, -1.6616001e-09)
+mesh = SubResource("QuadMesh_wyo0h")
+skeleton = NodePath("../Kanji_Support")
+surface_material_override/0 = SubResource("StandardMaterial3D_a3wq8")
+
+[node name="Kanji_Support" type="MeshInstance3D" parent="Quad" unique_id=1440527393]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_vkkdf")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qq3yi")
+
+[node name="MeshDrawing" type="MeshInstance3D" parent="Quad" unique_id=48204114]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.05461002, -3.4901506e-09)
+mesh = SubResource("QuadMesh_pxfo0")
+skeleton = NodePath("../Kanji_Support")
+surface_material_override/0 = SubResource("StandardMaterial3D_good6")
+
+[node name="down_left" type="Node3D" parent="Quad" unique_id=528428305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+
+[node name="up_right" type="Node3D" parent="Quad" unique_id=1145692029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Quad" unique_id=782924640]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/StaticBody3D" unique_id=183643614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025787473, -1.1920929e-07)
+shape = SubResource("BoxShape3D_ak6ka")
+
+[connection signal="on_local_position_debug" from="Script" to="Label3D" method="set_text"]

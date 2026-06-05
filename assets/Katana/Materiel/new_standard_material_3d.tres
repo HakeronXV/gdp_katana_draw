@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://s76xyk0k6w8q"]
+
+[ext_resource type="Texture2D" path="res://Katana/Katana_LP-correctif_DefaultMaterial_BaseColor.png" id="1_qmhxf"]
+
+[resource]
+albedo_texture = ExtResource("1_qmhxf")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b8ceyt6f2cj1n"]
+
+[ext_resource type="Script" uid="uid://bvnwbj485wjwo" path="res://addons/katana_draw/scripts/drawing_script.gd" id="1_bg5bg"]
+
+[node name="DrawingBoard" type="Node3D" unique_id=53190456 node_paths=PackedStringArray("painting_board")]
+script = ExtResource("1_bg5bg")
+painting_board = NodePath("")
+is_drawing = true
+brush_radius = 5
+
+[node name="Anchor" type="Node3D" parent="." unique_id=667122533]
+transform = Transform3D(-0.9925221, 0, 0.12206475, 0, 1, 0, -0.12206475, 0, -0.9925221, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=241484279]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="emit_current_texture"]

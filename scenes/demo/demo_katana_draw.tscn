@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://dft6dsv4snb3u"]
+
+[ext_resource type="PackedScene" uid="uid://knk7ldjyionw" path="res://addons/katana_draw/scenes/prefab/p_katana.tscn" id="1_wc5ys"]
+[ext_resource type="PackedScene" uid="uid://b8ceyt6f2cj1n" path="res://addons/katana_draw/scenes/prefab/p_drawing_board.tscn" id="2_aje60"]
+[ext_resource type="PackedScene" uid="uid://btbbr057a83en" path="res://addons/katana_draw/scenes/prefab/position_du_sabre.tscn" id="3_6qv7m"]
+
+[sub_resource type="Animation" id="Animation_3vitg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.04350251, 0.62977195, 0.5956744)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Katana_LP-correctif:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.20436004, -0.009170055, 0.2001338)]
+}
+
+[sub_resource type="Animation" id="Animation_80fep"]
+resource_name = "new_animation"
+length = 1.3333334
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.05, 2.14),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.04350251, 0.62977195, 0.5956744), Vector3(-0.04350251, 0.14590079, 0.5956744), Vector3(-0.04350251, 0.14590079, 0.5956744)]
+}
+
+[sub_resource type="Animation" id="Animation_nmnny"]
+resource_name = "new_animation_2"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Katana_LP-correctif:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.94, 19.98),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.20436004, -0.009170055, 0.2001338), Vector3(0.027702734, -0.009170045, 0.47106114), Vector3(-0.3079223, -0.00917013, 0.46088392)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1he0v"]
+_data = {
+&"RESET": SubResource("Animation_3vitg"),
+&"new_animation": SubResource("Animation_80fep"),
+&"new_animation_2": SubResource("Animation_nmnny")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmnny"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wc5ys"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aje60"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.56078434, 0.7372549, 0.5254902, 1)
+albedo_texture = SubResource("ViewportTexture_wc5ys")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nmnny"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_80fep"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1he0v"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_80fep")
+
+[node name="KatanaPaint" type="Node3D" unique_id=1609574989]
+
+[node name="Katana" parent="." unique_id=1823821026 instance=ExtResource("1_wc5ys")]
+transform = Transform3D(-0.99735945, -0.07261058, 0.0013600151, 0.00071161985, -0.028497353, -0.99959373, 0.07261983, -0.99695337, 0.02847369, -0.04350251, 0.62977195, 0.5956744)
+
+[node name="Katana_LP-correctif" parent="Katana" index="0" unique_id=1999221399]
+transform = Transform3D(0.999999, -1.2665987e-07, 3.958121e-09, 2.9802322e-08, 1, 0, -2.3283064e-10, 0, 1, -0.20436004, -0.009170055, 0.2001338)
+
+[node name="RayCast3D7" parent="Katana/Katana_LP-correctif/MSH_Katana_LP_BCP" parent_id_path=PackedInt32Array(1823821026, 1999221399, 834923910) index="6" unique_id=1844347007]
+transform = Transform3D(-7.450581e-09, 0.8993951, 0.43713617, 4.353933e-08, -0.43713623, 0.89939535, 1, 1.4901161e-08, -3.9115548e-08, 0.29550117, 0.035752535, 0.047404353)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Katana" unique_id=723745229]
+libraries/ = SubResource("AnimationLibrary_1he0v")
+autoplay = &"new_animation_2"
+
+[node name="DrawingBoard" parent="." unique_id=53190456 node_paths=PackedStringArray("painting_board") instance=ExtResource("2_aje60")]
+painting_board = NodePath("Scripts/PositionDuSabre/Quad/MeshDrawing")
+width = 218
+heigth = 218
+is_drawing = false
+
+[node name="Scripts" type="Node3D" parent="DrawingBoard" unique_id=380061227]
+
+[node name="PositionDuSabre" parent="DrawingBoard/Scripts" unique_id=704180931 instance=ExtResource("3_6qv7m")]
+
+[node name="Timer" type="Timer" parent="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" parent_id_path=PackedInt32Array(704180931, 1151370069) index="0" unique_id=163723031]
+autostart = true
+
+[node name="MeshInstance3D2" parent="DrawingBoard/Scripts/PositionDuSabre" index="2" unique_id=1448721934]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.8451089, 0.7584158, -0.16725647)
+visible = false
+
+[node name="Quad" parent="DrawingBoard/Scripts/PositionDuSabre" index="6" unique_id=458882736]
+transform = Transform3D(0.5, 0, 0, 0, 0.29928118, -0.40053812, 0, 0.40053812, 0.29928118, 0.051255047, 0.4168378, -0.13645607)
+
+[node name="MeshInstance3D" parent="DrawingBoard/Scripts/PositionDuSabre/Quad" index="0" unique_id=774543242]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.010293449)
+surface_material_override/0 = SubResource("StandardMaterial3D_nmnny")
+
+[node name="Kanji_Support" parent="DrawingBoard/Scripts/PositionDuSabre/Quad" index="1" unique_id=1440527393]
+surface_material_override/0 = SubResource("StandardMaterial3D_aje60")
+
+[node name="DirectionalLight3D" type="SpotLight3D" parent="." unique_id=1176857340]
+transform = Transform3D(-0.98536646, -0.063394904, 0.15822142, 0, 0.9282614, 0.3719284, -0.17044921, 0.36648577, -0.9146777, 0, 1.4091115, -2.3790429)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=357850458]
+transform = Transform3D(1, 0, 0, 0, 0.972361, 0.2334824, 0, -0.2334824, 0.972361, 0, 0.74055, 0.49002087)
+current = true
+
+[node name="Label3DV" type="Label3D" parent="." unique_id=1615850274]
+transform = Transform3D(0.99937296, 0.03502514, -0.0051969634, -0.03500412, 0.99937886, 0.004081659, 0.0053366935, -0.0038971882, 0.9999782, -0.35226554, 0.9101544, -0.45309827)
+text = "Bonjour"
+
+[node name="Label3DB" type="Label3D" parent="." unique_id=1150472912]
+transform = Transform3D(0.99937296, 0.03502514, -0.0051969634, -0.03500412, 0.99937886, 0.004081659, 0.0053366935, -0.0038971882, 0.9999782, 0.49202406, 0.8805823, -0.44858974)
+text = "Bonjour"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1545947139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0889734, -0.8815637)
+mesh = SubResource("QuadMesh_nmnny")
+skeleton = NodePath("../SubViewport")
+surface_material_override/0 = SubResource("StandardMaterial3D_1he0v")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=801942679]
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport" unique_id=1417658211]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport" unique_id=2081278660]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewport" unique_id=1430923030]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="katana_collision_point" from="Katana" to="DrawingBoard/Scripts/PositionDuSabre/Script" method="set_point_of_katana"]
+[connection signal="on_requested_texture" from="DrawingBoard" to="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" method="compute_result_from_texture_and_emit"]
+[connection signal="local_percentage_emit" from="DrawingBoard/Scripts/PositionDuSabre/Script" to="DrawingBoard" method="set_cursor_position"]
+[connection signal="debug_given_texture" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" to="SubViewport/TextureRect" method="set_texture"]
+[connection signal="debug_original_texture" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" to="SubViewport/TextureRect2" method="set_texture"]
+[connection signal="kanji_chosen" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" to="DrawingBoard" method="set_texture_to_use"]
+[connection signal="total_score_richard_percent100_fail_string" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" to="Label3DB" method="set_text"]
+[connection signal="total_score_richard_percent100_valid_string" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter" to="Label3DV" method="set_text"]
+[connection signal="timeout" from="DrawingBoard/Scripts/PositionDuSabre/Script/PixelCounter/Timer" to="DrawingBoard" method="emit_current_texture"]
+
+[editable path="Katana"]
+[editable path="Katana/Katana_LP-correctif"]
+[editable path="DrawingBoard/Scripts/PositionDuSabre"]
